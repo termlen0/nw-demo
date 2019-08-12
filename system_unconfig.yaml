@@ -1,0 +1,9 @@
+---
+- name: JUNOS MODULE TO REMOVE SYSTEM CONFIGS
+  hosts: juniper
+  gather_facts: false
+
+  tasks:
+    - name: ENSURE THAT THE SYSTEM CONFIGS ARE REMOVED
+      junos_system:
+        state: absent
