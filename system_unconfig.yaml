@@ -9,7 +9,7 @@
         state: absent
         domain_name:
         domain_search:
-    - name: ENSURE THAT THE SYSTEM CONFIGS ARE REMOVED
+    - name: ENSURE THAT THE NAME SERVERS ARE REMOVED
       junos_system:
         state: absent
         name_servers:
@@ -17,3 +17,7 @@
           - 3.3.3.3
           - 8.8.8.8
           - 1.1.1.1
+    - name: ENSURE THAT THE BANNER IS REMOVED
+      junos_banner:
+        banner:  motd
+        state: absent
