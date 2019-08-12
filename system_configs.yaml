@@ -1,0 +1,20 @@
+---
+- name: JUNOS MODULE TO SET SYSTEM CONFIGS
+  hosts: juniper
+  gather_facts: false
+
+  tasks:
+    - name: ENSURE THAT THE HOSTNAME AND DOMAIN NAME ARE SET
+      junos_system:
+        hostname: vSRX_01
+        domain_name: demo.ansible.com
+        domain_search:
+          - ansible.com
+          - redhat.com
+          - juniper.com
+
+    - name: ENSURE THAT THE NAME SERVERS ARE CONFIGURED
+      junos_system:
+        name_servers:
+          - 8.8.8.8
+          - 1.1.1.1
