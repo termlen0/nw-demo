@@ -13,3 +13,7 @@
       junos_system:
         state: absent
         name_servers:
+          - 192.168.1.1
+          - 3.3.3.3
+          - 8.8.8.8
+          - 1.1.1.1
