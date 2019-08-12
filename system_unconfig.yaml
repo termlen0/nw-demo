@@ -7,3 +7,9 @@
     - name: ENSURE THAT THE SYSTEM CONFIGS ARE REMOVED
       junos_system:
         state: absent
+        domain_name:
+        domain_search:
+    - name: ENSURE THAT THE SYSTEM CONFIGS ARE REMOVED
+      junos_system:
+        state: absent
+        name_servers:

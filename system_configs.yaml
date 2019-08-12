@@ -16,5 +16,5 @@
     - name: ENSURE THAT THE NAME SERVERS ARE CONFIGURED
       junos_system:
         name_servers:
-          - 8.8.8.8
-          - 1.1.1.1
+          - 192.168.1.1
+          - 3.3.3.3
