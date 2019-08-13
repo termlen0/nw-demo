@@ -38,8 +38,8 @@
     {% for interface,data in ansible_net_interfaces.items() %}
       <tr>
         <td>{{interface}}</td>
-        <td>{{data.admin-status}}</td>
-        <td>{{data.oper-status}}</td>
+        <td>{{data['admin-status']}}</td>
+        <td>{{data['oper-status']}}</td>
         <td>{{data.mtu}}</td>
         <td>{{data.type}}</td>
       </tr>
