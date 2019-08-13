@@ -1,7 +1,6 @@
 ---
 - name: JUNOS MODULE TO SET SYSTEM CONFIGS
   hosts: juniper
-  gather_facts: false
 
   tasks:
     - name: GATHER FACTS
