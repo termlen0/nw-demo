@@ -1,8 +1,8 @@
-snmp contact {{ snmp_data.contact }}
-snmp location {{ snmp_data.location }}
+snmp-server contact {{ snmp_data.contact }}
+snmp-server location {{ snmp_data.location }}
 {% for ro_comm in snmp_data.ro %}
-snmp community {{ ro_comm }} ro
+snmp-server community {{ ro_comm }} ro
 {% endfor %}  
 {% for rw_comm in snmp_data.rw %}
-snmp community {{ rw_comm }} rw
+snmp-server community {{ rw_comm }} rw
 {% endfor %}  
