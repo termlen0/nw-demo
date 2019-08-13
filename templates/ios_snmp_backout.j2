@@ -1,0 +1,8 @@
+no snmp contact {{ snmp_data.contact }}
+no snmp location {{ snmp_data.location }}
+{% for ro_comm in snmp_data.ro %}
+no snmp community {{ ro_comm }} ro
+{% endfor %}  
+{% for rw_comm in snmp_data.rw %}
+no snmp community {{ rw_comm }} rw
+{% endfor %}  

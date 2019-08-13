@@ -1,0 +1,80 @@
+---
+- name: DEMO MULTI VENDOR DEPLOY
+  hosts: all
+  gather_facts: no
+  tags: deploy
+
+  vars:
+    snmp_data:
+      ro:
+        - public
+        - ansible_ro
+        - multi_vendor_ro
+      rw:
+        - private
+        - super_secret
+      contact: netops@ansible.com
+      location: datacenter1
+
+
+  tasks:
+    - name: TASKS FOR JUNOS
+      block:
+
+      - name: TEMPLATE OUT THE JUNOS CONFIGS
+        template:
+          src: junos_snmp.j2
+          dest: ./junos_snmp.cfg
+
+      - name: ENSURE THAT JUNOS SNMP CONFIGS ARE PRESENT
+        junos_config:
+          src: ./junos_snmp.cfg
+
+      when: target == 'junos'
+
+    - name: ENSURE THAT ARISTA SNMP CONFIGS ARE PRESENT
+      eos_config:
+        src: eos_snmp.j2
+      when: target == 'eos'
+
+    - name: ENSURE THAT CISCO SNMP CONFIGS ARE PRESENT
+      ios_config:
+        src: ios_snmp.j2
+      when: target == 'ios'
+
+- name: DEMO MULTI VENDOR BACKOUT
+  hosts: all
+  gather_facts: no
+  tags: backout
+
+  vars:
+    snmp_data:
+      ro:
+        - public
+        - ansible_ro
+        - multi_vendor_ro
+      rw:
+        - private
+        - super_secret
+      contact: netops@ansible.com
+      location: datacenter1
+
+
+  tasks:
+
+    - name: TEMPLATE OUT THE JUNOS CONFIGS
+      template:
+        src: junos_snmp_backout.j2
+        dest: ./junos_snmp_backout.cfg
+
+    - name: ENSURE THAT JUNOS SNMP CONFIGS ARE ABSENT
+      junos_config:
+        src: ./junos_snmp_backout.cfg
+
+    - name: ENSURE THAT ARISTA SNMP CONFIGS ARE ABSENT
+      eos_config:
+        src: eos_snmp_backout.j2
+
+    - name: ENSURE THAT CISCO SNMP CONFIGS ARE ABSENT
+      ios_config:
+        src: ios_snmp_absent.j2

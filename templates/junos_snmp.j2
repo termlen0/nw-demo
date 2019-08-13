@@ -1,0 +1,8 @@
+set snmp contact {{ snmp_data.contact }}
+set snmp location {{ snmp_data.location }}
+{% for ro_comm in snmp_data.ro %}
+set snmp community {{ ro_comm }} authorization read-only
+{% endfor %}  
+{% for rw_comm in snmp_data.rw %}
+set snmp community {{ rw_comm }} authorization read-write
+{% endfor %}  

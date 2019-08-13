@@ -1,0 +1,8 @@
+delete snmp contact {{ snmp_data.contact }}
+delete snmp location {{ snmp_data.location }}
+{% for ro_comm in snmp_data.ro %}
+delete snmp community {{ ro_comm }} 
+{% endfor %}  
+{% for rw_comm in snmp_data.rw %}
+delete snmp community {{ rw_comm }} 
+{% endfor %}  
