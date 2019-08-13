@@ -1,6 +1,6 @@
 ---
 - name: DEMO MULTI VENDOR DEPLOY
-  hosts: all
+  hosts: cisco,arista,juniper
   gather_facts: no
   tags: deploy
 
@@ -30,20 +30,20 @@
         junos_config:
           src: ./junos_snmp.cfg
 
-      when: target == 'junos'
+      when: target == 'junos' and ansible_network_os == 'junos'
 
     - name: ENSURE THAT ARISTA SNMP CONFIGS ARE PRESENT
       eos_config:
         src: eos_snmp.j2
-      when: target == 'eos'
+      when: target == 'eos' and ansible_network_os == 'eos'
 
     - name: ENSURE THAT CISCO SNMP CONFIGS ARE PRESENT
       ios_config:
         src: ios_snmp.j2
-      when: target == 'ios'
+      when: target == 'ios' and ansible_network_os == 'ios'
 
 - name: DEMO MULTI VENDOR BACKOUT
-  hosts: all
+  hosts: cisco,arista,juniper
   gather_facts: no
   tags: backout
 
@@ -71,13 +71,16 @@
       junos_config:
         src: ./junos_snmp_backout.cfg
       ignore_errors: True
+      when: ansible_network_os == 'junos'
 
     - name: ENSURE THAT ARISTA SNMP CONFIGS ARE ABSENT
       eos_config:
         src: eos_snmp_backout.j2
       ignore_errors: True
+      when: ansible_network_os == 'eos'
 
     - name: ENSURE THAT CISCO SNMP CONFIGS ARE ABSENT
       ios_config:
         src: ios_snmp_absent.j2
       ignore_errors: True
+      when: ansible_network_os == 'ios'
