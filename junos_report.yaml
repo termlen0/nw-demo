@@ -16,7 +16,7 @@
 
     - name: RENDER FACTS AS A REPORT
       template:
-        src: full_report.j2
+        src: device_report.j2
         dest: "reports/device_report.html"
 
 
