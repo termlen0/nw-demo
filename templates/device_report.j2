@@ -14,16 +14,39 @@
         </tr>
     </thead>
     <tbody>
-{% for network_switch in groups['routers'] %}
+{% for network_switch in groups['juniper'] %}
         <tr>
             <td>{{hostvars[network_switch]['ansible_net_hostname']|upper}}</td>
-            <td>{{hostvars[network_switch]['ansible_net_iostype']}}</td>
+            <td>{{hostvars[network_switch]['ansible_net_system']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_serialnum']}}</td>
             <td>{{hostvars[network_switch]['ansible_net_version'] }}</td>
         </tr>
 {% endfor %}
     </tbody>
 </table>
+<table>
+  <thead>
+    <tr>
+      <th>Interface</th>
+      <th>Admin Status</th>
+      <th>Oper Status</th>
+      <th>MTU</th>
+      <th>Interface Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for interface,data in ansible_net_interfaces.items() %}
+      <tr>
+        <td>{{interface}}</td>
+        <td>{{data.admin-status}}</td>
+        <td>{{data.oper-status}}</td>
+        <td>{{data.mtu}}</td>
+        <td>{{data.type}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 <footer> Reported genearted on: {{ansible_date_time.date}} @ {{ansible_date_time.time}} </footer>
 </body>
 </html>
