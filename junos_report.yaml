@@ -6,7 +6,7 @@
   tasks:
     - name: GATHER FACTS
       junos_facts:
-        gather_subset: !config
+        gather_subset: "!config"
 
     - name: ENSURE REPORTS FOLDER EXISTS
       run_once: true
