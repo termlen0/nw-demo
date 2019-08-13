@@ -70,11 +70,14 @@
     - name: ENSURE THAT JUNOS SNMP CONFIGS ARE ABSENT
       junos_config:
         src: ./junos_snmp_backout.cfg
+      ignore_errors: True
 
     - name: ENSURE THAT ARISTA SNMP CONFIGS ARE ABSENT
       eos_config:
         src: eos_snmp_backout.j2
+      ignore_errors: True
 
     - name: ENSURE THAT CISCO SNMP CONFIGS ARE ABSENT
       ios_config:
         src: ios_snmp_absent.j2
+      ignore_errors: True
