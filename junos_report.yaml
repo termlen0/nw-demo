@@ -1,0 +1,73 @@
+---
+- name: JUNOS MODULE TO SET SYSTEM CONFIGS
+  hosts: juniper
+  gather_facts: false
+
+  tasks:
+    - name: GATHER FACTS
+      junos_facts:
+        gather_subset: !config
+
+    - name: ENSURE REPORTS FOLDER EXISTS
+      run_once: true
+      file:
+        name: reports
+        state: directory
+
+    - name: RENDER FACTS AS A REPORT
+      template:
+        src: full_report.j2
+        dest: "reports/device_report.html"
+
+
+- name: SETUP AMAZON S3 WEBSITE FOR STUDENT LOGIN
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  become: no
+  tags: website
+
+  vars:
+    webpage_name: "device-report"
+    ec2_region: us-east-1
+    ec2_az: us-east-1a
+    dns_zone: "redhatgov.io"
+    s3_state: present
+
+  tasks:
+    - name: CREATE S3 BUCKET
+      s3_bucket:
+        name: "{{webpage_name|lower}}.{{dns_zone|lower}}"
+        state: "{{ s3_state }}"
+        region: "{{ec2_region}}"
+        force: yes
+
+    - name: ENABLE WEB HOSTING
+      s3_website:
+       name: "{{webpage_name|lower}}.{{dns_zone|lower}}"
+       state: "{{ s3_state }}"
+       region: "{{ec2_region}}"
+       suffix: "device_report.html"
+      register: s3_site
+      when: s3_state == 'present'
+
+    - name: DNS FOR WEBPAGE FOR US-EAST-1
+      route53:
+        state: "{{ s3_state }}"
+        zone: "{{dns_zone}}"
+        record: "{{webpage_name|lower}}.{{dns_zone}}"
+        type: CNAME
+        overwrite: yes
+        value: "{{webpage_name|lower}}.{{dns_zone}}.s3-website-{{ec2_region}}.amazonaws.com"
+
+    - name: PUT WEBPAGE
+      s3_sync:
+        bucket: "{{webpage_name|lower}}.{{dns_zone}}"
+        region: "{{ec2_region}}"
+        file_root: "{{ playbook_dir }}/reports/"
+        mime_map:
+          .html: text/html
+        permission: public-read
+        file_change_strategy: checksum
+        include: "*"
+      when: s3_state == 'present'
