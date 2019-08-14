@@ -89,3 +89,11 @@ footer {
 span.highlight {
     background-color: yellow;
 }
+
+
+img {
+    float: right;
+    max-width: 100%;
+    max-height: 100%;
+                 
+}
