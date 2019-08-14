@@ -6,6 +6,16 @@
 	box-sizing: border-box;
 }
 
+
+/* HEADER section ========================== */
+
+.header
+{  
+    height:75px;
+    width: 964px;
+    color:white;
+}
+
 body {
   background:#353a40;
 }
