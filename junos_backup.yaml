@@ -15,7 +15,7 @@
         backup: yes
         backup_options:
           filename: "{{ inventory_hostname }}"
-          dir_path: "{{playbook_dir}}/backups }}"
+          dir_path: "{{playbook_dir}}/backups"
 
 - name: JUNOS RESTORE
 
