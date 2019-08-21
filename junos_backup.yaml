@@ -25,7 +25,6 @@
   tasks:
 
     - name: restore the config
-      become: yes
       junos_config:
         update: replace
         src: "{{playbook_dir}}/backups/{{inventory_hostname}}"
