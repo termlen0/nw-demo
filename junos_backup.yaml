@@ -28,4 +28,4 @@
       become: yes
       junos_config:
         update: replace
-        src: "/backups/{{inventory_hostname}}"
+        src: "{{playbook_dir}}/backups/{{inventory_hostname}}"
