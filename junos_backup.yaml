@@ -8,7 +8,7 @@
       file:
         path: "{{playbook_dir}}/backups"
         state: directory
-        mode: 755
+        mode: 0755
 
     - name: collect config
       junos_config:
@@ -29,5 +29,3 @@
       junos_config:
         update: replace
         src: "{{playbook_dir}}/backups/{{inventory_hostname}}"
-      become: yes
-      become_user: awx
