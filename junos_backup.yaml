@@ -29,3 +29,5 @@
       junos_config:
         update: replace
         src: "{{playbook_dir}}/backups/{{inventory_hostname}}"
+      become: yes
+      become_user: awx
