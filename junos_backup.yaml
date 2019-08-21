@@ -1,0 +1,31 @@
+---
+- name: JUNOS BACKUP
+  hosts: juniper
+  tags: backup
+
+  tasks:
+    - name: create backups directory
+      file:
+        path: "{{playbook_dir}}/backups"
+        state: directory
+        mode: 755
+
+    - name: collect config
+      junos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}"
+          dir_path: "{{playbook_dir}}/backups }}"
+
+- name: JUNOS RESTORE
+
+  hosts: juniper
+  tags: restore
+
+  tasks:
+
+    - name: restore the config
+      become: yes
+      junos_config:
+        update: replace
+        src: "/backups/{{inventory_hostname}}"
