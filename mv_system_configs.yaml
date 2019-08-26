@@ -1,0 +1,14 @@
+---
+- name: MULTIVENDOR SYSTEM CONFIGS
+  hosts: cisco, arista
+  gather_facts: false
+
+  tasks:
+    - name: ENSURE THAT THE HOSTNAME AND DOMAIN NAME ARE SET
+      include_tasks: "{{ ansible_network_os }}_host.yaml"
+
+    - name: ENSURE THAT THE NAME SERVERS ARE CONFIGURED
+      include_tasks: "{{ ansible_network_os }}_dns.yaml"
+
+    - name: CONFIGURE BANNER FROM FILE
+      include_tasks: "{{ ansible_network_os }}_banner.yaml"

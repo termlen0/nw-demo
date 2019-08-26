@@ -1,0 +1,26 @@
+---
+
+- name: SET THE HOSTNAME
+  eos_system:
+    hostname: "{{ inventory_hostname }}_ansible"
+    domain_name: demo.ansible.com
+    domain_search:
+      - ansible.com
+      - redhat.com
+      - juniper.com
+      - "{{ new_domain | default(omit)}}"
+
+- name: ENSURE THAT THE NAME SERVERS ARE CONFIGURED
+  eos_system:
+    name_servers:
+      - 192.168.1.1
+      - 3.3.3.3
+      - 8.8.8.8
+      - 1.1.1.1
+
+
+- name: CONFIGURE BANNER FROM FILE
+  eos_banner:
+    banner:  motd
+    text: "{{ lookup('file', './banners/motd.cfg') }}"
+    state: present
