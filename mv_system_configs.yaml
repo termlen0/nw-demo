@@ -2,18 +2,17 @@
 - name: MULTIVENDOR SYSTEM CONFIGS
   hosts: cisco, arista
   gather_facts: false
+  tags: configure
 
   tasks:
-    - name: ENSURE THAT THE SYSTEM CONFIGS ARE PRESENT
-      include_tasks:
-        file: "{{ ansible_network_os }}_host.yaml"
-        apply:
-          tags: configure
-      tags: configure
+    - name: ENSURE THAT THE HOSTNAME AND DOMAIN NAME ARE SET
+      include_tasks: "{{ ansible_network_os }}_host.yaml"
 
-    - name: ENSURE THAT THE SYSTEM CONFIGS ARE ABSENT
-      include_tasks:
-        file: "{{ ansible_network_os }}_remove.yaml"
-        apply:
-          tags: revert
-      tags: revert
+- name: MULTIVENDOR SYSTEM CONFIGS
+  hosts: cisco, arista
+  gather_facts: false
+  tags: revert
+
+  tasks:
+    - name: ENSURE THAT THE HOSTNAME AND DOMAIN NAME ARE SET
+      include_tasks: "{{ ansible_network_os }}_remove.yaml"

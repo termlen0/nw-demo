@@ -1,12 +1,12 @@
 ---
 
-- name: SET THE HOSTNAME
+- name: ENSURE DOMAIN SEARCH LIST IS ABSENT
   eos_system:
     state: absent
     domain_name:
     domain_search:
 
-- name: ENSURE THAT THE NAME SERVERS ARE CONFIGURED
+- name: ENSURE THAT THE NAME SERVERS ARE ABSENT
   eos_system:
     state: absent
     name_servers:
