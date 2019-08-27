@@ -2,7 +2,7 @@
 
 - name: SET THE HOSTNAME
   eos_system:
-    hostname: "{{ inventory_hostname }}_ansible"
+    hostname: "{{ inventory_hostname }}-ansible"
     domain_name: demo.ansible.com
     domain_search:
       - ansible.com
