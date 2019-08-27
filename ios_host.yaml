@@ -7,8 +7,6 @@
     domain_search:
       - ansible.com
       - redhat.com
-      - juniper.com
-      - "{{ new_domain | default(omit)}}"
 
 - name: ENSURE THAT THE NAME SERVERS ARE CONFIGURED
   ios_system:
