@@ -1,0 +1,30 @@
+---
+- name: LOCATE A MAC ADDRESS
+  hosts: arista
+  gather_facts: no
+
+  tasks:
+    - name: COLLECT THE MAC ADDRESSES
+      eos_command:
+        commands: "show arp | json"
+      register: arp_table
+
+
+   # - debug: var=item[0].hwAddress
+   #   loop: "{{ arp_table | json_query('stdout[*].ipV4Neighbors[*]') }}"
+
+   # - debug:
+   #     msg: "{{ arp_table | json_query('stdout[*].ipV4Neighbors[*]') }}"
+    - name: ASSERT WHETHER MAC ADDRESS IS PRESENT
+      assert:
+        that:
+          "'{{ user_input }}' == '{{ item[0].hwAddress }}'"
+        success_msg: "ARP match found on interface {{ item[0].interface }}"
+        fail_msg: "ARP match not found"
+        quiet: true
+      loop: "{{ arp_table | json_query('stdout[*].ipV4Neighbors[*]') }}"
+      register: result
+      ignore_errors: true
+
+
+    - debug: var=result.results[0].msg
