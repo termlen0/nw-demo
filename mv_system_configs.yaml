@@ -4,5 +4,10 @@
   gather_facts: false
 
   tasks:
-    - name: ENSURE THAT THE HOSTNAME AND DOMAIN NAME ARE SET
+    - name: ENSURE THAT THE SYSTEM CONGIGS ARE PRESENT
       include_tasks: "{{ ansible_network_os }}_host.yaml"
+      tags: configure
+
+    - name: ENSURE THAT THE SYSTEM CONFIGS ARE ABSENT
+      include_tasks: "{{ ansible_network_os }}_remove.yaml"
+      tags: revert
