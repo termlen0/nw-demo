@@ -5,9 +5,13 @@
 
   tasks:
     - name: ENSURE THAT THE SYSTEM CONFIGS ARE PRESENT
-      include_tasks: "{{ ansible_network_os }}_host.yaml"
-      tags: configure
+      include_tasks:
+        file: "{{ ansible_network_os }}_host.yaml"
+        apply:
+          tags: configure
 
     - name: ENSURE THAT THE SYSTEM CONFIGS ARE ABSENT
-      include_tasks: "{{ ansible_network_os }}_remove.yaml"
-      tags: revert
+      include_tasks:
+        file: "{{ ansible_network_os }}_remove.yaml"
+        apply:
+          tags: revert
