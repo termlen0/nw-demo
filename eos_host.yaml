@@ -20,5 +20,5 @@
 - name: CONFIGURE BANNER FROM FILE
   eos_banner:
     banner:  motd
-    text: "{{ lookup('file', playbook_dir + '/banners/motd.cfg') }}"
+    text: "{{ lookup('file', playbook_dir + '/banners/eos_motd.cfg') }}"
     state: present
