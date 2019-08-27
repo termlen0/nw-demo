@@ -9,9 +9,11 @@
         file: "{{ ansible_network_os }}_host.yaml"
         apply:
           tags: configure
+      tags: configure
 
     - name: ENSURE THAT THE SYSTEM CONFIGS ARE ABSENT
       include_tasks:
         file: "{{ ansible_network_os }}_remove.yaml"
         apply:
           tags: revert
+      tags: revert
