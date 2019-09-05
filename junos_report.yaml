@@ -1,6 +1,6 @@
 ---
 - name: JUNOS MODULE TO SET SYSTEM CONFIGS
-  hosts: juniper
+  hosts: "{{ set_of_devices }}"
 
   tasks:
     - name: GATHER FACTS
