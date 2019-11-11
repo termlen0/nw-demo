@@ -13,14 +13,14 @@
 
     
 
-- name: Tower Caching behaviour
-  hosts: rtr2, rtr4
-  gather_facts: no
-  tags: purge
+# - name: Tower Caching behaviour
+#   hosts: rtr2, rtr4
+#   gather_facts: no
+#   tags: purge
 
-  tasks:
-    - eos_facts:
-        gather_subset: "!config"
+#   tasks:
+#     - eos_facts:
+#         gather_subset: "!config"
 
-    - meta: clear_facts
+#     - meta: clear_facts
       
