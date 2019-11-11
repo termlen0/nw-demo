@@ -1,8 +1,6 @@
 ---
 - name: Tower Caching behaviour
   hosts: rtr2,rtr4
-  tags: normal
-
   tasks:
     # - include_vars: vars/interface_vars.yaml
 
@@ -10,53 +8,51 @@
 
     - eos_facts:
 
-    - debug: var=hostvars[inventory_hostname]
+    # - debug: var=hostvars[inventory_hostname]
           
 
-    - template:
-        src: simple.j2
-        dest: "{{ inventory_hostname }}.md"
+    # - template:
+    #     src: simple.j2
+    #     dest: "{{ inventory_hostname }}.md"
         
 - name: Caching for JUNOS
   hosts: rtr3
-  tags: normal
 
   tasks:
     - junos_facts:
         gather_subset: "!config"
 
-    - debug: var=hostvars[inventory_hostname]
+    # - debug: var=hostvars[inventory_hostname]
 
-    - template:
-        src: simple.j2
-        dest: "{{ inventory_hostname }}.md"
+    # - template:
+    #     src: simple.j2
+    #     dest: "{{ inventory_hostname }}.md"
 
 - name: Caching for IOS
   hosts: rtr1
-  tags: normal
 
   tasks:
     - ios_facts:
         gather_subset: "!config"
 
-    - debug: var=hostvars[inventory_hostname]
+    # - debug: var=hostvars[inventory_hostname]
 
-    - template:
-        src: simple.j2
-        dest: "{{ inventory_hostname }}.md"
+    # - template:
+    #     src: simple.j2
+    #     dest: "{{ inventory_hostname }}.md"
     
 
 
-- name: Tower Caching behaviour
-  hosts: all
-  gather_facts: no
-  tags: purge
+# - name: Tower Caching behaviour
+#   hosts: all
+#   gather_facts: no
+#   tags: purge
 
-  tasks:
-    - include_vars: vars/interface_vars.yaml
+#   tasks:
+#     - include_vars: vars/interface_vars.yaml
 
-    - debug: var=interfaces.loopbacks
-    - eos_facts:
+#     - debug: var=interfaces.loopbacks
+#     - eos_facts:
 
-    - meta: clear_facts
+#     - meta: clear_facts
       
