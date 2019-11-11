@@ -1,6 +1,6 @@
 ---
 - name: JUNOS MODULE TO SET SYSTEM CONFIGS
-  hosts: "{{ set_of_devices }}"
+  hosts: rtr3
 
   tasks:
     - name: GATHER FACTS
