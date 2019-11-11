@@ -10,35 +10,17 @@
         gather_subset: "!config"
 
        
-- name: Caching for JUNOS
-  hosts: rtr3
-  gather_facts: no
-
-  tasks:
-    - junos_facts:
-        gather_subset: "!config"
-
-    
-- name: Caching for IOS
-  hosts: rtr1
-  gather_facts: no
-
-  tasks:
-    - ios_facts:
-        gather_subset: "!config"
 
     
 
 - name: Tower Caching behaviour
-  hosts: all
+  hosts: rtr2, rtr4
   gather_facts: no
   tags: purge
 
   tasks:
-    - include_vars: vars/interface_vars.yaml
-
-    - debug: var=interfaces.loopbacks
     - eos_facts:
+        gather_subset: "!config"
 
     - meta: clear_facts
       
