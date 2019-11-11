@@ -13,6 +13,7 @@
         
     - include_vars:
         dir: varsdir
+        depth: 1
         extensions:
           - yaml
 
