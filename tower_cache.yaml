@@ -11,6 +11,9 @@
 
     - meta: clear_facts
 
+    - debug: var=ansible_net_interfaces
+      
+
        
 
     
