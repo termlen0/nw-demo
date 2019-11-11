@@ -22,7 +22,8 @@
   tasks:
     - junos_facts:
         gather_subset: "!config"
-        debug: var=hostvars[inventory_hostname]
+
+    - debug: var=hostvars[inventory_hostname]
 
 
 - name: Caching for IOS
@@ -33,7 +34,8 @@
   tasks:
     - ios_facts:
         gather_subset: "!config"
-        debug: var=hostvars[inventory_hostname]
+
+    - debug: var=hostvars[inventory_hostname]
 
     
 
