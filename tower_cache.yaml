@@ -1,6 +1,6 @@
 ---
 - name: Tower Caching behaviour
-  hosts: all
+  hosts: rtr2,rtr4
   gather_facts: no
   tags: normal
 
@@ -8,6 +8,11 @@
     - include_vars: vars/interface_vars.yaml
 
     - debug: var=interfaces.loopbacks
+
+    - eos_facts:
+        gather_subset: !configuration
+
+    
 
 
 - name: Tower Caching behaviour
@@ -19,6 +24,10 @@
     - include_vars: vars/interface_vars.yaml
 
     - debug: var=interfaces.loopbacks
+
+    - eos_facts:
+        gather_subset: !configuration
+
 
     - meta: clear_facts
       
