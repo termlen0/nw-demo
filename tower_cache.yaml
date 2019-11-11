@@ -1,17 +1,19 @@
 ---
-- name: Tower Caching behaviour
+- name: TOWER CACHING BEHAVIOR
   hosts: rtr2,rtr4
   gather_facts: no
   tags: normal
   
   tasks:
-    - git:
+    - name: DOWNLOAD VARS FROM EXTERNAL REPO
+      git:
         repo: https://github.com/termlen0/vars_repo
         dest: varsdir
       run_once: true
       delegate_to: localhost
         
-    - include_vars:
+    - name: INCLUDE THE VARS WITHIN THE PLAY
+      include_vars:
         dir: varsdir
         depth: 1
         extensions:
@@ -19,37 +21,44 @@
       delegate_to: localhost
       run_once: true
 
-    - debug: var=ospf_area
+    - name: SHOW THE VALUE OF ONE OF THE VARS
+      debug: var=ospf_area
 
-    - stat:
+    - name: STAT THE DIR TO ENSURE IT EXITS
+      stat:
         path: varsdir
       register: p
       run_once: true
       delegate_to: localhost
 
       
-    - debug:
+    - name: DISPLAY OUTPUT BASED ON STAT
+      debug:
         msg: "Path exists and is a directory"
       when: p.stat.isdir is defined and p.stat.isdir
       run_once: true
        
       
-    - eos_facts:
+    - name: COLLECT DEVICE FACTS
+      eos_facts:
         gather_subset: "!config"
 
-    - file:
+    - name: REMOVE THE DOWNLOADED VARS DIR
+      file:
         path: varsdir
         state: absent
       delegate_to: localhost
       run_once: true
 
-    - stat:
+    - name: REDO THE DIR STAT TO CHECK IF DIR EXISTS
+      stat:
         path: varsdir
       register: p
       run_once: true
       delegate_to: localhost
 
-    - debug:
+    - name: DISPLAY OUTPUT BASED ON STAT
+      debug:
         msg: "Path no longer exists!!"
       when:  p.stat.isdir is not defined 
       run_once: true
