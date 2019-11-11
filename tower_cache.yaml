@@ -10,7 +10,8 @@
     - debug: var=interfaces.loopbacks
 
     - eos_facts:
-        gather_subset: !configuration
+        gather_subset: "!config"
+          
 
     
 
@@ -26,7 +27,7 @@
     - debug: var=interfaces.loopbacks
 
     - eos_facts:
-        gather_subset: !configuration
+        gather_subset: "!config"
 
 
     - meta: clear_facts
