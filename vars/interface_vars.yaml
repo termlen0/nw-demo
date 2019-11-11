@@ -1,0 +1,15 @@
+---
+interfaces:
+  loopbacks:
+    - id: 100
+      ip_address: 10.3.3.1
+      ip_mask: 255.255.255.255
+    - id: 101
+      ip_address: 10.3.3.2
+      ip_mask: 255.255.255.255
+    - id: 200
+      ip_address: 10.3.2.1
+      ip_mask: 255.255.255.255
+    - id: 201
+      ip_address: 10.3.2.2
+      ip_mask: 255.255.255.255
