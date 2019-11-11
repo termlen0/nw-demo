@@ -10,9 +10,14 @@
         dest: varsdir
         
     - include_vars:
-        dir: varsdir
+        file: varsdir/common.yaml
+        #depth: 1
+        
 
     - debug: var=ospf_area
+
+    - command: ls -l varsdir
+        
       
     - eos_facts:
         gather_subset: "!config"
@@ -20,6 +25,9 @@
     - file:
         path: varsdir
         state: absent
+
+    - command: ls -l varsdir
+
         
    # - meta: clear_facts
 
