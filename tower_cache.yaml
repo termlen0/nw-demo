@@ -8,6 +8,8 @@
     - git:
         repo: https://github.com/termlen0/vars_repo
         dest: varsdir
+      run_once: true
+      delegate_to: localhost
         
     - include_vars:
         file: varsdir/common.yaml
