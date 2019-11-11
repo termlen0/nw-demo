@@ -5,14 +5,35 @@
   tags: normal
 
   tasks:
-    - include_vars: vars/interface_vars.yaml
+    # - include_vars: vars/interface_vars.yaml
 
-    - debug: var=interfaces.loopbacks
+    # - debug: var=interfaces.loopbacks
 
     - eos_facts:
 
     - debug: var=hostvars[inventory_hostname]
           
+
+- name: Caching for JUNOS
+  hosts: rtr3
+  gather_facts: no
+  tags: normal
+
+  tasks:
+    - junos_facts:
+        gather_subset: "!config"
+        debug: var=hostvars[inventory_hostname]
+
+
+- name: Caching for IOS
+  hosts: rtr1
+  gather_facts: no
+  tags: normal
+
+  tasks:
+    - ios_facts:
+        gather_subset: "!config"
+        debug: var=hostvars[inventory_hostname]
 
     
 
