@@ -2,6 +2,7 @@
 - name: Tower Caching behaviour
   hosts: rtr2,rtr4
   gather_facts: no
+  tags: normal
   
   tasks:
     - include_vars: vars/interface_vars.yaml
