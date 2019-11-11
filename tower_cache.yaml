@@ -33,7 +33,7 @@
     - file:
         path: varsdir
         state: absent
-      delgate_to: localhost
+      delegate_to: localhost
       run_once: true
 
     - stat:
