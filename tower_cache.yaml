@@ -29,16 +29,16 @@
 
     
 
-# - name: Tower Caching behaviour
-#   hosts: all
-#   gather_facts: no
-#   tags: purge
+- name: Tower Caching behaviour
+  hosts: all
+  gather_facts: no
+  tags: purge
 
-#   tasks:
-#     - include_vars: vars/interface_vars.yaml
+  tasks:
+    - include_vars: vars/interface_vars.yaml
 
-#     - debug: var=interfaces.loopbacks
-#     - eos_facts:
+    - debug: var=interfaces.loopbacks
+    - eos_facts:
 
-#     - meta: clear_facts
+    - meta: clear_facts
       
