@@ -16,17 +16,23 @@
         depth: 1
         extensions:
           - yaml
+      delegate_to: localhost
+      run_once: true
 
     - debug: var=ospf_area
 
     - stat:
         path: varsdir
       register: p
+      run_once: true
+      delegate_to: localhost
+
       
     - debug:
         msg: "Path exists and is a directory"
       when: p.stat.isdir is defined and p.stat.isdir
-             
+      run_once: true
+       
       
     - eos_facts:
         gather_subset: "!config"
@@ -40,8 +46,12 @@
     - stat:
         path: varsdir
       register: p
-      
+      run_once: true
+      delegate_to: localhost
+
     - debug:
         msg: "Path no longer exists and is a directory"
-      when: not p.stat.isdir is defined and p.stat.isdir
+      when:  p.stat.isdir is not defined 
+      run_once: true
+      delegate_to: localhost
     
