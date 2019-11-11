@@ -1,47 +1,32 @@
 ---
 - name: Tower Caching behaviour
   hosts: rtr2,rtr4
+  gather_facts: no
+  
   tasks:
-    # - include_vars: vars/interface_vars.yaml
-
-    # - debug: var=interfaces.loopbacks
-
+    - include_vars: vars/interface_vars.yaml
     - eos_facts:
+        gather_subset: "!config"
 
-    # - debug: var=hostvars[inventory_hostname]
-          
-
-    # - template:
-    #     src: simple.j2
-    #     dest: "{{ inventory_hostname }}.md"
-        
+       
 - name: Caching for JUNOS
   hosts: rtr3
+  gather_facts: no
 
   tasks:
     - junos_facts:
         gather_subset: "!config"
 
-    # - debug: var=hostvars[inventory_hostname]
-
-    # - template:
-    #     src: simple.j2
-    #     dest: "{{ inventory_hostname }}.md"
-
+    
 - name: Caching for IOS
   hosts: rtr1
+  gather_facts: no
 
   tasks:
     - ios_facts:
         gather_subset: "!config"
 
-    # - debug: var=hostvars[inventory_hostname]
-
-    # - template:
-    #     src: simple.j2
-    #     dest: "{{ inventory_hostname }}.md"
     
-
 
 # - name: Tower Caching behaviour
 #   hosts: all
