@@ -9,7 +9,7 @@
     - eos_facts:
         gather_subset: "!config"
 
-    - meta: clear_facts
+   # - meta: clear_facts
 
     - debug: var=ansible_net_interfaces
       
