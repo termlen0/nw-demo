@@ -9,6 +9,8 @@
     - eos_facts:
         gather_subset: "!config"
 
+    - meta: clear_facts
+
        
 
     
