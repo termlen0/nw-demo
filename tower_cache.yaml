@@ -12,17 +12,20 @@
       delegate_to: localhost
         
     - include_vars:
-        file: varsdir/common.yaml
-        #depth: 1
-        
+        dir: varsdir
+        extensions:
+          - yaml
 
     - debug: var=ospf_area
 
-    - command: ls -l varsdir
-      register: dirlisting
-
-    - debug: var=dirlisting.stdout
-        
+    - stat:
+        path: varsdir
+      register: p
+      
+    - debug:
+        msg: "Path exists and is a directory"
+      when: p.stat.isdir is defined and p.stat.isdir
+             
       
     - eos_facts:
         gather_subset: "!config"
@@ -30,31 +33,14 @@
     - file:
         path: varsdir
         state: absent
+      delgate_to: localhost
+      run_once: true
 
-    - command: ls -l varsdir
-      ignore_errors: yes
-      register: output
-
-    - debug: var=output.stdout
-
-        
-   # - meta: clear_facts
-
-    #- debug: var=ansible_net_interfaces
+    - stat:
+        path: varsdir
+      register: p
       
-
-       
-
+    - debug:
+        msg: "Path no longer exists and is a directory"
+      when: not p.stat.isdir is defined and p.stat.isdir
     
-
-# - name: Tower Caching behaviour
-#   hosts: rtr2, rtr4
-#   gather_facts: no
-#   tags: purge
-
-#   tasks:
-#     - eos_facts:
-#         gather_subset: "!config"
-
-#     - meta: clear_facts
-      
