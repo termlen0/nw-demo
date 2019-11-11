@@ -24,6 +24,7 @@
     - include_vars: vars/interface_vars.yaml
 
     - debug: var=interfaces.loopbacks
+    - eos_facts:
 
     - meta: clear_facts
       
