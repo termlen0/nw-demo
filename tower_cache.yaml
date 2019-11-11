@@ -17,6 +17,9 @@
     - debug: var=ospf_area
 
     - command: ls -l varsdir
+      register: dirlisting
+
+    - debug: var=dirlisting
         
       
     - eos_facts:
@@ -27,6 +30,10 @@
         state: absent
 
     - command: ls -l varsdir
+      ignore_errors: yes
+      register: output
+
+    - debug: var=output
 
         
    # - meta: clear_facts
