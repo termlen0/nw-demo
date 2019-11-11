@@ -5,10 +5,23 @@
   tags: normal
   
   tasks:
-    - include_vars: vars/interface_vars.yaml
+    - git:
+        repo: https://github.com/termlen0/vars_repo
+        dest: varsdir
+        
+    - include_vars:
+        dir: varsdir
+        extensions: yaml
+
+    - debug: var=ospf_area
+      
     - eos_facts:
         gather_subset: "!config"
 
+    - file:
+        path: varsdir
+        state: absent
+        
    # - meta: clear_facts
 
     #- debug: var=ansible_net_interfaces
