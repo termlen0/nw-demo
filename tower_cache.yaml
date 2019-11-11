@@ -11,7 +11,6 @@
         
     - include_vars:
         dir: varsdir
-        extensions: yaml
 
     - debug: var=ospf_area
       
