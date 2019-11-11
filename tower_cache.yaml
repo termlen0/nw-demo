@@ -50,7 +50,7 @@
       delegate_to: localhost
 
     - debug:
-        msg: "Path no longer exists and is a directory"
+        msg: "Path no longer exists!!"
       when:  p.stat.isdir is not defined 
       run_once: true
       delegate_to: localhost
