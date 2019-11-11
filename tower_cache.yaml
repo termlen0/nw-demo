@@ -1,0 +1,24 @@
+---
+- name: Tower Caching behaviour
+  hosts: all
+  gather_facts: no
+  tags: normal
+
+  tasks:
+    - include_vars: vars/interface_vars.yaml
+
+    - debug: var=interfaces.loopbacks
+
+
+- name: Tower Caching behaviour
+  hosts: all
+  gather_facts: no
+  tags: purge
+
+  tasks:
+    - include_vars: vars/interface_vars.yaml
+
+    - debug: var=interfaces.loopbacks
+
+    - meta: clear_facts
+      
