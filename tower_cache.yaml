@@ -10,7 +10,6 @@
     - debug: var=interfaces.loopbacks
 
     - eos_facts:
-        gather_subset: "!config"
           
 
     
@@ -25,10 +24,6 @@
     - include_vars: vars/interface_vars.yaml
 
     - debug: var=interfaces.loopbacks
-
-    - eos_facts:
-        gather_subset: "!config"
-
 
     - meta: clear_facts
       
