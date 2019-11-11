@@ -1,7 +1,6 @@
 ---
 - name: Tower Caching behaviour
   hosts: rtr2,rtr4
-  gather_facts: no
   tags: normal
 
   tasks:
@@ -20,7 +19,6 @@
         
 - name: Caching for JUNOS
   hosts: rtr3
-  gather_facts: no
   tags: normal
 
   tasks:
@@ -35,7 +33,6 @@
 
 - name: Caching for IOS
   hosts: rtr1
-  gather_facts: no
   tags: normal
 
   tasks:
