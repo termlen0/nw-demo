@@ -14,6 +14,10 @@
     - debug: var=hostvars[inventory_hostname]
           
 
+    - template:
+        src: simple.j2
+        dest: "{{ inventory_hostname }}.md"
+        
 - name: Caching for JUNOS
   hosts: rtr3
   gather_facts: no
@@ -25,6 +29,9 @@
 
     - debug: var=hostvars[inventory_hostname]
 
+    - template:
+        src: simple.j2
+        dest: "{{ inventory_hostname }}.md"
 
 - name: Caching for IOS
   hosts: rtr1
@@ -37,6 +44,9 @@
 
     - debug: var=hostvars[inventory_hostname]
 
+    - template:
+        src: simple.j2
+        dest: "{{ inventory_hostname }}.md"
     
 
 
