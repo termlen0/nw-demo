@@ -19,7 +19,7 @@
     - command: ls -l varsdir
       register: dirlisting
 
-    - debug: var=dirlisting
+    - debug: var=dirlisting.stdout
         
       
     - eos_facts:
@@ -33,7 +33,7 @@
       ignore_errors: yes
       register: output
 
-    - debug: var=output
+    - debug: var=output.stdout
 
         
    # - meta: clear_facts
