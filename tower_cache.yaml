@@ -24,6 +24,9 @@
     - name: SHOW THE VALUE OF ONE OF THE VARS
       debug: var=ospf_area
 
+    - name: SHOW THE VALUE OF ANOTHER VAR
+      debug: var=backbone.tunnel_network
+
     - name: STAT THE DIR TO ENSURE IT EXITS
       stat:
         path: varsdir

@@ -1,0 +1,10 @@
+---
+- name: TOWER CACHING BEHAVIOR
+  hosts: rtr2,rtr4
+  gather_facts: no
+  tags: normal
+  
+  tasks:
+    - name: CLEAR CACHED FACTS
+      meta: clear_facts
+      
