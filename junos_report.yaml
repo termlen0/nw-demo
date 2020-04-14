@@ -30,7 +30,7 @@
     webpage_name: "device-report"
     ec2_region: us-east-1
     ec2_az: us-east-1a
-    dns_zone: "redhatgov.io"
+    dns_zone: "rhdemo.io"
     s3_state: present
 
   tasks:
