@@ -70,3 +70,8 @@
         file_change_strategy: checksum
         include: "*"
       when: s3_state == 'present'
+
+    - name: PRINT WEBSITE DETAILS
+      debug:
+        msg:
+          - The report is now live at device-report.rhdemo.io
