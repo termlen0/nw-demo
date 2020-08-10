@@ -9,3 +9,5 @@
 
     - name: use the collection facts
       cisco.ios.ios_facts:
+      register: result
+   - debug: var=result
