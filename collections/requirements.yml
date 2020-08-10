@@ -1,0 +1,3 @@
+collections:
+  - name: cisco.ios
+    source: https://cloud.redhat.api/automation-hub/
