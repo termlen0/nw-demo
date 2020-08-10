@@ -12,8 +12,8 @@
                   aces:
                     - sequence: 10
                       protocol_options:
-                      icmp:
-                        traceroute: true
+                        icmp:
+                          traceroute: true
                     - grant: deny
                       protocol_options:
                         tcp:
