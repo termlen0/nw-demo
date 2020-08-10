@@ -1,0 +1,26 @@
+---
+- name: IOS ACLs
+  hosts: rtr1
+  tasks:
+    - name: TEST merged ACLS
+      cisco.ios.ios_acls:
+        state: merged
+        config:
+          - afi: ipv4
+            acls:
+                - name: 110
+                  aces:
+                    - sequence: 10
+                      protocol_options:
+                      icmp:
+                        traceroute: true
+                    - grant: deny
+                      protocol_options:
+                        tcp:
+                          ack: true
+                        source:
+                          host: 198.51.100.0
+                        destination:
+                          host: 198.51.110.0
+                          port_protocol:
+                            eq: telnet
