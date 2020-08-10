@@ -6,3 +6,6 @@
     - name: Placeholder
       debug:
         msg: "The collected facts are now cached in Tower"
+
+   - name: use the collection facts
+     cisco.ios.ios_facts:

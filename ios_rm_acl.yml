@@ -18,9 +18,9 @@
                       protocol_options:
                         tcp:
                           ack: true
-                        source:
-                          host: 198.51.100.0
-                        destination:
-                          host: 198.51.110.0
-                          port_protocol:
-                            eq: telnet
+                      source:
+                        host: 198.51.100.0
+                      destination:
+                        host: 198.51.110.0
+                        port_protocol:
+                          eq: telnet
