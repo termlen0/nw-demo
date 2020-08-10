@@ -1,0 +1,8 @@
+---
+- name: Resource module demo
+  hosts: cisco
+
+  tasks:
+    - name: Placeholder
+      debug:
+        msg: "The collected facts are now cached in Tower"
