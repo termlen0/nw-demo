@@ -2,9 +2,9 @@
 - name: IOS ACLs
   hosts: rtr1
   tasks:
-    - name: TEST "{{state}}"ed ACLS
+    - name: TEST "{{state}}" ACLS
       cisco.ios.ios_acls:
         state: "{{ state }}"
       register: result
     - debug:
-        msg: "{{ result.state }}"
+        msg: "{{ result }}.{{ state }}"
