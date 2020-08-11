@@ -9,7 +9,7 @@
 
     - name: use the collection facts
       cisco.ios.ios_facts:
-        gather_network_resources: all,!vlans
+        gather_network_resources: acls
       register: result
 
     - debug: var=result
