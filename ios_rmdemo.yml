@@ -9,7 +9,7 @@
 
     - name: use the collection facts
       cisco.ios.ios_facts:
-        gather_subset:
+        gather_network_resources: all
       register: result
 
     - debug: var=result
