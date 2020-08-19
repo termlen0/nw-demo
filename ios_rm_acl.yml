@@ -1,10 +1,11 @@
 ---
 - name: IOS ACLs
   hosts: rtr1
+  gather_facts: no
   tasks:
-    - name: TEST "{{state}}" ACLS
+    - name: GATHER  ACLS
       cisco.ios.ios_acls:
-        state: "{{ state }}"
+        state: gathered
       register: result
     - debug:
-        msg: "{{ result }}.{{ state }}"
+        msg: "{{ result.gathered }}"
