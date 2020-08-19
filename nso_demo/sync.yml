@@ -1,0 +1,65 @@
+---
+- name: Sync from device
+  hosts: rtr1
+  gather_facts: no
+  tags: sync_from
+  vars:
+    username: "admin"
+    password: "admin"
+    url: "http://172.16.7.70:8080/jsonrpc"
+    perform_backup: no
+
+
+  tasks: 
+
+    - name: Sync from one device
+      nso_action:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        url: "{{ url }}"
+        path: /ncs:devices/sync-from
+        input: { 'device': [ "{{ inventory_hostname }}" ] }
+      changed_when: False
+      register: r_sync
+
+    - debug:
+        var: r_sync
+
+    - name: Check all sync
+      nso_action:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        url: "{{ url }}"
+        path: /ncs:devices/check-sync
+        input: {}
+      changed_when: False
+      register: r_sync
+
+    - debug:
+        var: r_sync
+
+
+
+- name: Sync to device
+  hosts: rtr1
+  gather_facts: no
+  tags: sync_to
+  vars:
+    username: "admin"
+    password: "admin"
+    url: "http://172.16.7.70:8080/jsonrpc"
+    perform_backup: no
+
+  tasks:
+    - name: Sync to a specific device
+      nso_action:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        url: "{{ url }}"
+        path: /ncs:devices/sync-to
+        input: { "device": ["{{ inventory_hostname }}"] }
+      changed_when: False
+      register: r_sync
+
+    - debug:
+        var: r_sync

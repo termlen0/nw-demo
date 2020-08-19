@@ -1,0 +1,42 @@
+---
+- name: Update SNMP
+  hosts: rtr1
+  gather_facts: no
+  tags: ansible_snmp
+  tasks:
+    - name: Add the SNMP RO string
+      ios_config:
+        commands:
+          - "snmp-server community {{ ro_comm }} ro"
+
+
+
+- name: Check sync
+  hosts: localhost
+  gather_facts: no
+  tags: check_sync
+  vars:
+    username: "admin"
+    password: "admin"
+    url: "http://172.16.7.70:8080/jsonrpc"
+    perform_backup: no
+
+
+  tasks:
+
+    - name: Check all sync
+      nso_action:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        url: "{{ url }}"
+        path: /ncs:devices/check-sync
+        input: {}
+      changed_when: False
+      register: r_sync
+
+    - debug:
+        var: r_sync
+
+    - fail:
+        msg: NSO is out of sync
+      when: "r_sync['output']['sync-result'][0]['result'] == 'out-of-sync'"
