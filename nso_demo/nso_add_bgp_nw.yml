@@ -1,14 +1,13 @@
 ---
-- name: Update BGP 
+- name: Update BGP
   hosts: rtr1
   gather_facts: no
-  tags: ansible_snmp
   tasks:
-    - name: configure global bgp as 64496
+    - name: Advertise a new subnet
       ios_bgp:
         config:
-           bgp_as: 64496
+           bgp_as: "{{ asn }}"
            networks:
-             - prefix: "{{ subnet | ipaddr('network') }}" 
+             - prefix: "{{ subnet | ipaddr('network') }}"
                masklen: "{{ subnet| ipaddr('prefix') }}"
         operation: merge
