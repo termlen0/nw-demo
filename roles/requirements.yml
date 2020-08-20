@@ -1,3 +1,0 @@
-- src: https://github.com/willtome/ansible-git
-  name: ansible-git
-  scm: git
