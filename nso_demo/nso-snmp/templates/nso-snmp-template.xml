@@ -1,0 +1,16 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="nso-snmp">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <name>{/device}</name>
+      <config>
+        <snmp-server xmlns="urn:ios">
+        <community>
+          <name>{/snmp_ro}</name>
+          <RO/>
+        </community>
+      </snmp-server>
+      </config>
+    </device>
+  </devices>
+</config-template>

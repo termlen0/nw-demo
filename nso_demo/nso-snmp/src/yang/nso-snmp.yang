@@ -1,0 +1,32 @@
+module nso-snmp {
+  namespace "http://com/example/nsosnmp";
+  prefix nso-snmp;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  augment /ncs:services {
+  list nso-snmp {
+    key snmp_ro;
+
+    uses ncs:service-data;
+    ncs:servicepoint "nso-snmp";
+
+    leaf snmp_ro {
+      type string;
+    }
+
+    // may replace this with other ways of refering to the devices.
+    leaf-list device {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+
+  }
+  } // augment /ncs:services {
+}
