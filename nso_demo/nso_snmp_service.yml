@@ -1,0 +1,28 @@
+---
+- name: Configure NSO from Ansible
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    username: "admin"
+    password: "admin"
+    url: "http://172.16.7.70:8080/jsonrpc"
+    perform_backup: no
+
+
+  tasks: 
+    
+    - name: Add a new SNMP RO community string
+      nso_config:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        url: "{{ url }}"
+        data:
+          tailf-ncs:services:
+            nso-snmp:nso-snmp: 
+              - snmp_ro: "mytest_ro123"
+      changed_when: False
+      register: r_sync
+
+    - debug:
+        var: r_sync
