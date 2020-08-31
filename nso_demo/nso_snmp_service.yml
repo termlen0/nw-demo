@@ -21,6 +21,8 @@
           tailf-ncs:services:
             nso-snmp:nso-snmp: 
               - snmp_ro: "mytest_ro123"
+                nso-snmp:device: 
+                  - "rtr1"
       changed_when: False
       register: r_sync
 
