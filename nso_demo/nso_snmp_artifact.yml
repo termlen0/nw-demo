@@ -3,4 +3,4 @@
     - name: Pass the workflow survey vars to next job
       set_stats:
         data:
-          snmp_ro: "{{ input_snmp_ro }}"
+          input_snmp_ro: "{{ snmp_ro }}"
