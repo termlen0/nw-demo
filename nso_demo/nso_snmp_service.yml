@@ -1,6 +1,6 @@
 ---
 - name: Configure NSO from Ansible
-  hosts: localhost
+  hosts: cisco
   gather_facts: no
 
   vars:
@@ -10,8 +10,8 @@
     perform_backup: no
 
 
-  tasks: 
-    
+  tasks:
+
     - name: Add a new SNMP RO community string
       nso_config:
         username: "{{ username }}"
@@ -19,10 +19,10 @@
         url: "{{ url }}"
         data:
           tailf-ncs:services:
-            nso-snmp:nso-snmp: 
-              - snmp_ro: "mytest_ro123"
-                nso-snmp:device: 
-                  - "rtr1"
+            nso-snmp:nso-snmp:
+              - snmp_ro: "{{ input_snmp_ro }}"
+                nso-snmp:device:
+                  - "{{ inventory_hostname }}"
       changed_when: False
       register: r_sync
 
