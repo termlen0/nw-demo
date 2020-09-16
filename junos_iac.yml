@@ -1,0 +1,33 @@
+---
+- name: DEMO MULTI VENDOR DEPLOY
+  hosts: juniper
+  gather_facts: no
+
+  vars:
+    snmp_data:
+      ro:
+        - public
+        - ansible_ro
+        - multi_vendor_ro
+      rw:
+        - private
+        - super_secret
+      contact: netops@ansible.com
+      location: datacenter1
+
+
+  tasks:
+      - name: Junos config dir
+        file:
+          path: ./junos-config
+          state: directory
+
+      - name: TEMPLATE OUT THE JUNOS CONFIGS
+        template:
+          src: junos_snmp.j2
+          dest: ./junosjunos_snmp.cfg
+
+      - name: ENSURE THAT JUNOS SNMP CONFIGS ARE PRESENT
+        junos_config:
+          src: ./junos_snmp.cfg
+
