@@ -6,11 +6,11 @@
   vars:
     username: "admin"
     password: "admin"
-    url: "http://172.16.7.70:8080/jsonrpc"
+    url: "http://127.0.0.1:8080/jsonrpc"
     perform_backup: no
 
 
-  tasks: 
+  tasks:
 
     - name: Sync from one device
       nso_action:
