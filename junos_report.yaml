@@ -30,7 +30,7 @@
     webpage_name: "device-report"
     ec2_region: us-east-1
     ec2_az: us-east-1a
-    dns_zone: "rhdemo.io"
+    dns_zone: "rhtelco.io"
     s3_state: present
 
   tasks:
@@ -74,4 +74,4 @@
     - name: PRINT WEBSITE DETAILS
       debug:
         msg:
-          - The report is now live at device-report.rhdemo.io
+          - The report is now live at device-report.rhtelco.io
