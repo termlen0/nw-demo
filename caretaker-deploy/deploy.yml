@@ -23,7 +23,7 @@
         parents: interface Tunnel0
         lines:
           - tunnel source interface Ethernet1
-          - tunnel destination "{{ tunnel_vars.tunnel_destination }}"
+          - "tunnel destination {{ tunnel_vars.tunnel_destination }}"
 # TODO: TEST
 
     - name: Configure the routing protocol
