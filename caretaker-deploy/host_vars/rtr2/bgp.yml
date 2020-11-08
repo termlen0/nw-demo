@@ -1,6 +1,6 @@
 bgp_config:
   bgp_as: 65000
-  router_id: "{{ interfaces_l3_config[0]['ipv4'] }}"
+  router_id: "{{ interfaces.interfaces_l3_config[0]['ipv4'] }}"
   log_neighbor_changes: true
   address_family:
   neighbors:
