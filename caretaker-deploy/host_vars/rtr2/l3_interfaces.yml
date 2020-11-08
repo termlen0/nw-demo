@@ -1,0 +1,13 @@
+---
+interfaces:
+  interfaces_l3_config:
+    - name: Loopback100
+      ipv4: 192.168.2.2/32
+    - name: Tunnel0
+      ipv4: 10.24.24.2/24
+  interfaces_config:
+    - name: Loopback100
+      description: BGP interface for rtr2
+    - name: Tunnel0
+      description: Tunnel interface to rtr4
+      mtu: 1394

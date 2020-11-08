@@ -1,0 +1,23 @@
+---
+- name: Deploy IaC configs to BGP routers
+  hosts: arista
+  gather_facts: no
+  tasks:
+    - name: Configure the host parameters
+      arista.eos.eos_system:
+        hostname: "{{ hostname }}"
+
+    - name: Configure the interfaces
+      arista.eos.eos_interfaces:
+        config: "{{ interfaces.interfaces_config }}"
+        state: merged
+
+    - name: Configure the L3 interfaces
+      arista.eos.eos_l3_interfaces:
+        config: "{{ interfaces.interfaces_l3_config }}"
+        state: merged
+
+    - name: Configure the routing protocol
+      arista.eos.eos_bgp:
+        config: "{{ bgp_config }}"
+        operation: replace

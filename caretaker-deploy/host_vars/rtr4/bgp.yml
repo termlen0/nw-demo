@@ -1,0 +1,11 @@
+bgp_config:
+  bgp_as: 65000
+  router_id: "{{ interfaces_l3_config[0]['ipv4'] }}"
+  log_neighbor_changes: true
+  address_family:
+  neighbors:
+    - neighbor: "{{ remote_public_ip }}"
+      remote_as: 65000
+  networks:
+    - prefix: 10.25.25.0
+      masklen: 24
