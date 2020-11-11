@@ -4,7 +4,8 @@
   gather_facts: no
   pre_tasks:
     - name: Invoke Caretaker
-      include_role: termlen0.caretaker.caretaker
+      include_role:
+        name: termlen0.caretaker.caretaker
 
   tasks:
     - name: Configure the host parameters
