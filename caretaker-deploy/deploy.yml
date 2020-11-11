@@ -1,0 +1,38 @@
+---
+- name: Deploy IaC configs to BGP routers
+  hosts: arista
+  gather_facts: no
+  pre_tasks:
+    - name: Invoke Caretaker
+      include_role:
+        name: termlen0.caretaker.caretaker
+
+  tasks:
+    - name: Configure the host parameters
+      arista.eos.eos_system:
+        hostname: "{{ hostname }}"
+
+    - name: Configure the interfaces
+      arista.eos.eos_interfaces:
+        config: "{{ interfaces.interfaces_config }}"
+        state: merged
+# TODO: TEST
+    - name: Configure the L3 interfaces
+      arista.eos.eos_l3_interfaces:
+        config: "{{ interfaces.interfaces_l3_config }}"
+        state: merged
+# TODO: TEST
+
+    - name: Configure the tunnels
+      arista.eos.eos_config:
+        parents: interface Tunnel0
+        lines:
+          - tunnel source interface Ethernet1
+          - "tunnel destination {{ tunnel_vars.tunnel_destination }}"
+# TODO: TEST
+
+    - name: Configure the routing protocol
+      arista.eos.eos_bgp:
+        config: "{{ bgp_config }}"
+        operation: replace
+# TODO: TEST

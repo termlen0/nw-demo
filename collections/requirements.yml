@@ -1,0 +1,6 @@
+---
+collections:
+  - name: termlen0.caretaker
+    source: https://galaxy.ansible.com
+  - name: arista.eos
+    source: https://galaxy.ansible.com

@@ -1,0 +1,2 @@
+tunnel_vars:
+  tunnel_destination: "{{ remote_public_ip }}"
