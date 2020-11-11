@@ -2,6 +2,10 @@
 - name: Deploy IaC configs to BGP routers
   hosts: arista
   gather_facts: no
+  pre_tasks:
+    - name: Invoke Caretaker
+      include_role: termlen0.caretaker.caretaker
+
   tasks:
     - name: Configure the host parameters
       arista.eos.eos_system:
