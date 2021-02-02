@@ -31,5 +31,5 @@
 
     - debug:
         msg: "{{ response }}"
-      verbosity: 1
+        verbosity: 1
       tags: mga
