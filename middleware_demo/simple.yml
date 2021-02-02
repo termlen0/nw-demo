@@ -18,6 +18,6 @@
       tags: webseal
     - name: Check MGA
       uri:
-        url: http://node1:9000
+        url: http://node1:8080
         staus_code: 200
       tags: mga
