@@ -39,7 +39,7 @@
     - name: No issues
       debug:
         msg: "No errors found on {{ inventory_hostname }}"
-      when: 'OK' in response['msg']
+      when: "'OK' in response.msg"
       tags:
         - systems_up
         - mga
@@ -48,9 +48,9 @@
       set_stats:
         data:
           nodes: "{{ inventory_hostname }}"
-      when: 'OK' not in response.msg
+      when: "'OK' not in response.msg"
       tags: mga
     - fail:
         msg: some systems failed
-      when: 'OK' in response.msg
+      when: "'OK' in response.msg"
       tags: mga
