@@ -21,3 +21,8 @@
         url: http://node1:8080
         staus_code: 200
       tags: mga
+      register: response
+
+    - debug:
+        msg: "{{ response }}"
+      verbosity: 1
