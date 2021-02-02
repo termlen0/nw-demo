@@ -25,7 +25,7 @@
       tags: webseal
     - name: Check MGA
       uri:
-        url: http://node1:8080
+        url: "http://{{ inventory_hostname }}:8080"
         status_code: 200
       tags: mga
       register: response
@@ -52,5 +52,5 @@
       tags: mga
     - fail:
         msg: some systems failed
-      when: "'OK' in response.msg"
+      when: "'OK' not in response.msg"
       tags: mga
