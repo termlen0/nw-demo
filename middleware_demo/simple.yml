@@ -35,20 +35,22 @@
         msg: "{{ response }}"
         verbosity: 1
       tags: mga
+
     - name: No issues
       debug:
         msg: "No errors found on {{ inventory_hostname }}"
-      when: response.msg == 'OK'
+      when: 'OK' in response['msg']
       tags:
         - systems_up
         - mga
+
     - name: Nodes with failures
       set_stats:
         data:
           nodes: "{{ inventory_hostname }}"
-      when: response.msg != 'OK'
+      when: 'OK' not in response.msg
       tags: mga
     - fail:
         msg: some systems failed
-      when: response.msg != 'OK'
+      when: 'OK' in response.msg
       tags: mga
