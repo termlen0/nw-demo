@@ -1,0 +1,23 @@
+---
+- name: Simple playbook
+  hosts: node1
+  gather_facts: no
+  tasks:
+    - name: Ensure that python3 is installed
+      yum:
+        name: python3
+        state: present
+      become: yes
+    - name: Check reverse proxy
+      debug:
+        msg: "Status OK"
+      tags: reverse_proxy
+    - name: Check WebSeal
+      debug:
+        msg: "WebSeal OK"
+      tags: webseal
+    - name: Check MGA
+      uri:
+        url: http://node1
+        staus_code: 200
+      tags: mga
