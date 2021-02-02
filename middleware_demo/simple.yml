@@ -1,6 +1,6 @@
 ---
 - name: Simple playbook
-  hosts: node1
+  hosts: node1,node2
   gather_facts: no
   vars:
     isam_up: yes
@@ -26,11 +26,26 @@
     - name: Check MGA
       uri:
         url: http://node1:8080
-        staus_code: 200
+        status_code: 200
       tags: mga
       register: response
+      failed_when: false
 
     - debug:
         msg: "{{ response }}"
         verbosity: 1
       tags: mga
+    - name: No issues
+      debug:
+        msg: "No errors found on {{ inventory_hostname }}"
+      when: response.msg == 'OK'
+      tags: systems_up
+    - name: Nodes with failures
+      set_stats:
+        data:
+          nodes: "{{ inventory_hostname }}"
+      when: response.msg != 'OK'
+
+    - fail:
+        msg: some systems failed
+      when: response.msg != 'OK'

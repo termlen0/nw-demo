@@ -1,0 +1,7 @@
+---
+- name: call middleware
+  hosts: node3
+  gather_facts: no
+  tasks:
+    - debug:
+        msg: "API call to {{ nodes }}"
