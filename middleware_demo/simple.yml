@@ -47,7 +47,7 @@
     - name: Nodes with failures
       set_stats:
         data:
-          nodes: "{{ inventory_hostname }}"
+          nodes: "{{ inventory_hostname | list }}"
       when: "'OK' not in response.msg"
       tags: mga
     - fail:
