@@ -28,7 +28,7 @@
 
     - name: Collect devices that need reboot
       set_fact:
-        failed_nodes: "{{ nodes|default([]) + [ item ] }}"
+        failed_nodes: "{{ nodes|default([]) + [ item.host ] }}"
       loop: "{{ return_data.json }}"
       when: item.restart
 
@@ -37,3 +37,14 @@
         data:
           reboot_nodes: "{{ failed_nodes }}"
       when: failed_nodes is defined
+
+    - name: Collect devices that were recently rebooted
+      set_fact:
+        recent_nodes: "{{ nodes|default([]) + [ item.host ] }}"
+      loop: "{{ return_data.json }}"
+      when: not item.restart
+
+    - name: Display nodes that will not be restarted
+      debug:
+        msg: "{{ recent_nodes }}"
+      when: recent_data is defined
