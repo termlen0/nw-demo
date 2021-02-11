@@ -25,3 +25,15 @@
       register: return_data
     - debug:
         msg: "{{ return_data }}"
+
+    - name: Collect devices that need reboot
+      set_fact:
+        failed_nodes: "{{ nodes|default([]) + [ item ] }}"
+      loop: "{{ return_data.json }}"
+      when: item.restart
+
+    - name: Nodes with failures
+      set_stats:
+        data:
+          reboot_nodes: "{{ failed_nodes }}"
+      when: failed_nodes is defined

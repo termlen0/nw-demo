@@ -1,8 +1,8 @@
 ---
 - name: Rebooting
-  hosts: "{{ node }}"
+  hosts: "{{ reboot_nodes }}"
   gather_facts: no
   tasks:
     - name: Rebooting device
       debug:
-        msg: "Rebooting {{node}}...."
+        msg: "Rebooting {{inventory_hostname}}...."
