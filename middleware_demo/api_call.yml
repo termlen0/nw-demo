@@ -1,7 +1,15 @@
 ---
 - name: call middleware
-  hosts: node3
+  hosts: localhost
   gather_facts: no
   tasks:
     - debug:
         msg: "API call to {{ nodes }}"
+        #verbosity: 1
+    - name: Create the API body
+      set_fact:
+        api_body: "{{ api_body | default([]) | union([{'host': item}]) }}"
+      loop: "{{ nodes }}"
+    - debug:
+        msg: "{{ api_body }}"
+        #verbosity: 1
