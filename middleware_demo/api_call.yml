@@ -12,7 +12,16 @@
       loop: "{{ nodes }}"
     - name: Update the API body
       set_fact:
-        api_body: "{{ 'hosts' : api_body }}"
+        api_body: "{{ {'hosts' : api_body} }}"
     - debug:
         msg: "{{ api_body }}"
         #verbosity: 1
+    - name: Make the API call
+      uri:
+        url: http://45.21.227.192:8181/service/host/reboot/
+        method: POST
+        body_format: json
+        body: "{{ api_body }}"
+      register: return_data
+    - debug:
+        msg: "{{ return_data }}"
