@@ -10,6 +10,9 @@
       set_fact:
         api_body: "{{ api_body | default([]) | union([{'host': item}]) }}"
       loop: "{{ nodes }}"
+    - name: Update the API body
+      set_fact:
+        api_body: "{{ 'hosts' : api_body }}"
     - debug:
         msg: "{{ api_body }}"
         #verbosity: 1
