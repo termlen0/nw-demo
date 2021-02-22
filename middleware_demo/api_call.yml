@@ -2,6 +2,8 @@
 - name: call middleware
   hosts: localhost
   gather_facts: no
+  vars:
+    api_endpoint: http://camel-infra-dm-route-intelli-infra-apps.apps.ocp-jaguar.ocpinfinity.com/service/host/reboot/
   tasks:
     - debug:
         msg: "API call to {{ nodes }}"
@@ -18,7 +20,7 @@
         #verbosity: 1
     - name: Make the API call
       uri:
-        url: http://45.21.227.192:8181/service/host/reboot/
+        url: "{{ api_endpoint }}"
         method: POST
         body_format: json
         body: "{{ api_body }}"
