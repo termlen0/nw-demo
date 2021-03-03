@@ -4,6 +4,7 @@
   gather_facts: no
   vars:
     isam_up: yes
+    condition: true
   tasks:
     - name: Ensure that python3 is installed
       yum:
@@ -19,18 +20,41 @@
       debug:
         msg: "Status OK"
       tags: reverse_proxy
+
     - name: Restart reverse proxy
       debug:
         msg: "Restarting reverse proxy"
       tags: restart_rp
+      until: "{{ condition }}"
+      retries: 3
+      delay: 2
+
     - name: Check WebSeal
       debug:
         msg: "WebSeal OK"
       tags: webseal
+
     - name: Restart webseal
       debug:
         msg: "Restarting webseal"
       tags: restart_ws
+      until: "{{ condition }}"
+      retries: 3
+      delay: 2
+
+    - name: Check NewJunction
+      debug:
+        msg: "New Junction  OK"
+      tags: new_junction
+
+    - name: Restart NewJunction
+      debug:
+        msg: "Restarting NewJunction"
+      tags: restart_nj
+      until: "{{ condition }}"
+      retries: 3
+      delay: 2
+
     - name: Check MGA
       uri:
         url: "http://{{ inventory_hostname }}:8080"
@@ -38,14 +62,25 @@
       tags: mga
       register: response
       failed_when: false
+
     - name: Restart MGA
       debug:
         msg: "Restarting the Junction"
       tags: restart_mga
+      until: "{{ condition }}"
+      retries: 3
+      delay: 2
+
     - name: Fail the MGA restart
       fail:
         msg: "Restarting MGA failed"
       tags: restart_mga
+
+    - name: E2E Testing
+      debug:
+        msg: "All tests pass"
+      tags: e2e
+
     - debug:
         msg: "{{ response }}"
         verbosity: 1
