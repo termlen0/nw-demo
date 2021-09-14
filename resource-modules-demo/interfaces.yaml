@@ -1,0 +1,8 @@
+---
+- name: Mulitvendor data models
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Gather interface data model for all
+      include_tasks: "{{ ansible_network_os }}.yml"

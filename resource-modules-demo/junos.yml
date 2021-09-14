@@ -1,0 +1,21 @@
+---
+- name: Gather JUNOS interface
+  juniper.junos.junos_interfaces:
+    state: gathered
+  register: junos_interfaces
+
+- debug: var=junos_interfaces
+
+- name: Gather JUNOS interface
+  juniper.junos.junos_l2_interfaces:
+    state: gathered
+  register: junos_l2interfaces
+
+- debug: var=junos_l2interfaces
+
+- name: Gather JUNOS interface
+  juniper.junos.junos_l3_interfaces:
+    state: gathered
+  register: junos_l3interfaces
+
+- debug: var=junos_l3interfaces

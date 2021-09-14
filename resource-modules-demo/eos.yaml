@@ -1,0 +1,21 @@
+---
+- name: Gather EOS interface
+  arista.eos.eos_interfaces:
+    state: gathered
+  register: eos_interfaces
+
+- debug: var=eos_interfaces
+
+- name: Gather EOS interface
+  arista.eos.eos_l2_interfaces:
+    state: gathered
+  register: eos_l2interfaces
+
+- debug: var=eos_l2interfaces
+
+- name: Gather EOS interface
+  arista.eos.eos_l3_interfaces:
+    state: gathered
+  register: eos_l3interfaces
+
+- debug: var=eos_l3interfaces

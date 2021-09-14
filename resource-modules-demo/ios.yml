@@ -1,0 +1,21 @@
+---
+- name: Gather IOS interface
+  cisco.ios.ios_interfaces:
+    state: gathered
+  register: ios_interfaces
+
+- debug: var=ios_interfaces
+
+- name: Gather IOS interface
+  cisco.ios.ios_l2_interfaces:
+    state: gathered
+  register: ios_l2interfaces
+
+- debug: var=ios_l2interfaces
+
+- name: Gather IOS interface
+  cisco.ios.ios_l3_interfaces:
+    state: gathered
+  register: ios_l3interfaces
+
+- debug: var=ios_l3interfaces

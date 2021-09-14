@@ -4,3 +4,7 @@ collections:
     source: https://galaxy.ansible.com
   - name: arista.eos
     source: https://galaxy.ansible.com
+  - name: cisco.ios
+    source: https://galaxy.ansible.com
+  - name: juniper.junos
+    source: https://galaxy.ansible.com
