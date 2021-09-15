@@ -4,18 +4,21 @@
     state: gathered
   register: eos_interfaces
 
-- debug: var=eos_interfaces
+- debug:
+    msg: "{{ eos_interfaces | to_nice_yaml }}"
 
 - name: Gather EOS interface
   arista.eos.eos_l2_interfaces:
     state: gathered
   register: eos_l2interfaces
 
-- debug: var=eos_l2interfaces
+- debug:
+    msg: "{{ eos_l2interfaces | to_nice_yaml }}"
 
 - name: Gather EOS interface
   arista.eos.eos_l3_interfaces:
     state: gathered
   register: eos_l3interfaces
 
-- debug: var=eos_l3interfaces
+- debug:
+    msg: "{{ eos_l3interfaces | to_nice_yaml }}"
