@@ -22,7 +22,7 @@
         success_msg: "ARP match found on interface {{ item[0].interface }}"
         fail_msg: "ARP match not found"
         quiet: true
-      loop: "{{ arp_table | community.general.json_query('stdout[*].ipV4Neighbors[*]') }}"
+      loop: "{{ arp_table | json_query('stdout[*].ipV4Neighbors[*]') }}"
       register: result
       ignore_errors: true
 
