@@ -10,6 +10,7 @@
           dir_path: /tmp/
           filename: "{{ inventory_hostname }}.txt"
       register: config_output
+       when: ansible_network_os == 'dellemc.os6.os6'
     - name: create time stamp for play
       set_fact:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
@@ -18,7 +19,7 @@
       run_once: true
     - name: Create a directory if it does not exist
       ansible.builtin.file:
-        path: /backup/
+        path: /export/local/ansible/backup/
         state: directory
       delegate_to: backup-server
       become: true
@@ -26,7 +27,7 @@
     - name: save configuration to backup server
       copy:
         src: "{{ config_output.backup_path }}"
-        dest: "/backup/{{hostvars['backup-server'].datetime}}/"
+        dest: "/export/local/ansible/backup/{{hostvars['backup-server'].datetime}}/"
       when: config_output is defined
       become: true
       delegate_to: backup-server
