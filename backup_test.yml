@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: backup configuration
-      cisco.ios.ios_config:
+      dellemc.os6.os6_config:
         backup: true
         backup_options:
           dir_path: /tmp/
