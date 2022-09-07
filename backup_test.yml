@@ -10,6 +10,7 @@
           dir_path: /tmp/
           filename: "{{ inventory_hostname }}.txt"
       register: config_output
+      when: ansible_network_os == dellemc.os6.os6
     - name: create time stamp for play
       set_fact:
         datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
