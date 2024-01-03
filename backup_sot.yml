@@ -1,4 +1,4 @@
-- hosts: rtr1
+- hosts: cisco
   gather_facts: true
   vars:
     GIT_REPO: https://github.com/termlen0/nw-demo
