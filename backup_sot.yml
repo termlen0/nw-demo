@@ -1,0 +1,22 @@
+- hosts: rtr1
+  gather_facts: true
+  vars:
+    GIT_REPO: https://github.com/termlen0/nw-demo
+    GH_ACCESS_TOKEN: "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"
+    username: "Ajay Chenampara"
+    email: ajay.chenampara@gmail.com
+  tasks:
+    - name: Network Backup and Resource Manager
+      ansible.builtin.include_role:
+        name: network.backup.run
+      vars:
+        operation: backup
+        type: full
+        data_store:
+          scm:  
+            origin:
+              url: "{{ GIT_REPO }}"
+              token: "{{ GH_ACCESS_TOKEN }}"
+              user:
+                name: "{{ username }}"
+                email: "{{ email }}"
