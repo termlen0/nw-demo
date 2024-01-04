@@ -1,0 +1,7 @@
+---
+collections:
+  - cisco.ios
+  - arista.eos
+  - junipernetworks.junos
+  - awx.awx
+  - ansible.scm
