@@ -1,0 +1,126 @@
+--- 
+
+
+- name: cisco asa backup 
+
+hosts: cisco_asa 
+
+gather_facts: false 
+
+connection: network_cli 
+
+become: true 
+
+
+
+vars: 
+
+date: "{{ lookup('ansible.builtin.pipe', 'date +%Y-%m-%d-%H-%M-%S') }}" 
+
+# backup_filename - Filename for running config backup. 
+
+backup_filename: 'asa-backup-{{ date }}.cfg' 
+
+
+
+
+
+
+
+tasks: 
+
+
+
+- name: Gather all legacy facts 
+
+cisco.asa.asa_facts: 
+
+gather_subset: all 
+
+
+
+- name: Gather only the config and default facts 
+
+cisco.asa.asa_facts: 
+
+gather_subset: 
+
+- config 
+
+
+
+- name: Show the ASA version 
+
+cisco.asa.asa_command: 
+
+commands: 
+
+- show version 
+
+
+
+- name: Create a directory if it does not exist 
+
+ansible.builtin.file: 
+
+path: /backup/ 
+
+state: directory 
+
+mode: "755" 
+
+delegate_to: 172.30.148.236 
+
+become: true 
+
+run_once: true 
+
+
+
+- name: configurable backup path 
+
+cisco.asa.asa_config: 
+
+backup: yes 
+
+backup_options: 
+
+filename: '{{ inventory_hostname }}-{{ backup_filename }}' 
+
+dir_path: /tmp/ 
+
+register: backup_file 
+
+
+
+
+
+- name: print the output 
+
+debug: 
+
+var: backup_file 
+
+
+
+
+
+- name: list TMP folder 
+
+command: ls -l /tmp/ 
+
+
+
+- name: Export tech support file to host 
+
+ansible.builtin.copy: 
+
+src: "{{ backup_file.backup_path }}" 
+
+dest: '/backup/' 
+
+register: result 
+
+delegate_to: 172.30.148.236 
+
+become: true
